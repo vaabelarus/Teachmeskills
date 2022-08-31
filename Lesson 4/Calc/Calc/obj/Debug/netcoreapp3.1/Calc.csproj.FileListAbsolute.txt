@@ -1,0 +1,14 @@
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\bin\Debug\netcoreapp3.1\Calc.exe
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\bin\Debug\netcoreapp3.1\Calc.deps.json
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\bin\Debug\netcoreapp3.1\Calc.runtimeconfig.json
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\bin\Debug\netcoreapp3.1\Calc.runtimeconfig.dev.json
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\bin\Debug\netcoreapp3.1\Calc.dll
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\bin\Debug\netcoreapp3.1\Calc.pdb
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.csproj.AssemblyReference.cache
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.GeneratedMSBuildEditorConfig.editorconfig
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.AssemblyInfoInputs.cache
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.AssemblyInfo.cs
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.csproj.CoreCompileInputs.cache
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.dll
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.pdb
+D:\repos\Teachmeskills\Lesson 4\Calc\Calc\obj\Debug\netcoreapp3.1\Calc.genruntimeconfig.cache
