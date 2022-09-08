@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\repos\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
+      "projectUniqueName": "D:\\repos\\Teachmeskills\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
       "projectName": "Calc",
-      "projectPath": "D:\\repos\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
+      "projectPath": "D:\\repos\\Teachmeskills\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
       "packagesPath": "C:\\Users\\vasilevskiy\\.nuget\\packages\\",
-      "outputPath": "D:\\repos\\Teachmeskills\\Lesson 4\\Calc\\Calc\\obj\\",
+      "outputPath": "D:\\repos\\Teachmeskills\\Teachmeskills\\Lesson 4\\Calc\\Calc\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vasilevskiy\\AppData\\Roaming\\NuGet\\NuGet.Config",

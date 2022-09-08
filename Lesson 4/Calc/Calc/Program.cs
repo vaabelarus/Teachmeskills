@@ -6,121 +6,127 @@ namespace Calc
     {
         static void Main(string[] args)
         {
-            
-            string result= Calculator();
-            while (result == "yes")
+           
+            string answer = "yes";
+            while (answer == "yes")
             {
-                result = Calculator();
+                Console.WriteLine("enter an arithmetic operation from the suggested: +, -, *, /,  %, Sqrt.");
+                string text = Console.ReadLine();
+                text = WithoutSpaces(text);
+                string sign = WhatOperation(text);
+                double result = Calculator(text, sign);
+                Console.WriteLine(result);
+                Console.WriteLine("enter \"YES\" if you want to restart the program");
+                answer = Console.ReadLine();
+                answer = answer.ToLower();
+                
             }
         }
-        static string Calculator()
+        static double Calculator(string text, string sign)
         {
-            Console.WriteLine("enter an arithmetic operation from the suggested: +, -, *, /,  %, Sqrt.");
-            string sign = Console.ReadLine();
-            if (sign == "+")
+           
+                string[] values = text.Split(sign);
+            if (values.Length == 2)
             {
-                try
+                double first = Convert.ToDouble(values[1]);
+                double result = RootOfTheNumber(first);
+                return result;
+            }
+            else
+            {
+                double first = Convert.ToDouble(values[0]);
+                double second = Convert.ToDouble(values[1]);
+                double result = sign switch
                 {
-                    Console.WriteLine("Enter the first syllable");
-                    int first = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter the second syllable");
-                    int second = Int32.Parse(Console.ReadLine());
-                    first += second;
-                    Console.WriteLine($"Answer is {first}");
-                }
-                catch (Exception e)
+                    "+" => Addition(first, second),
+                    "-" => Subtraction(first, second),
+                    "*" => Multiplication(first, second),
+                    "/" => Division(first, second),
+                    "%" => Remainder(first, second),
+                };
+                return result;
+            }
+           
+            
+        }
+        static double Addition(double first, double second)
+        {
+            return first + second;
+        }
+        static double Subtraction(double first, double second)
+        {
+            return first - second;
+        }
+        static double Multiplication(double first, double second)
+        {
+            return first * second;
+        }
+        static double Division(double first, double second)
+        {
+            return first / second;
+        }
+        static double Remainder(double first, double second)
+        {
+            return first % second;
+        }
+        static double RootOfTheNumber(double first)
+        {
+            return Math.Sqrt(first);
+        } 
+        static string WithoutSpaces(string txt)
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(txt) == true)
                 {
-                    Console.WriteLine(e.Message);
-                }
+                    
+                    throw new Exception("You didn't write anything");
 
-            }
-            else if (sign == "-")
-            {
-                try
-                {
-                    Console.WriteLine("Enter the decreasing number");
-                    int first = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter the subtracted number");
-                    int second = Int32.Parse(Console.ReadLine());
-                    first -= second;
-                    Console.WriteLine($"Answer is {first}");
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            else if (sign == "*")
-            {
-                
-                try
-                {
-                    Console.WriteLine("Enter the number to be multiplied");
-                    int first = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter the multiplier");
-                    int second = Int32.Parse(Console.ReadLine());
-                    first *= second;
-                    Console.WriteLine($"Answer is {first}");
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            else if (sign == "/")
-            {
-               
-                try
-                {
-                    Console.WriteLine("Enter a divisible number");
-                    double first = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter the divisor");
-                    double second = Int32.Parse(Console.ReadLine());
-                    first /= second;
-                    Console.WriteLine($"Answer is {first}");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            else if (sign == "%")
-            {
-                try
-                {
-                    Console.WriteLine("Enter a number");
-                    double first = Double.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter the percentage");
-                    double second = Double.Parse(Console.ReadLine());
-                    first = (first / 100) * second;
-                    Console.WriteLine($"Answer is {first}");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                char[] symbs = txt.ToCharArray();
 
+                string text = "";
+                for (int i = 0; i < symbs.Length; i++)
+                {
+                    if (symbs[i] != ' ')
+                    {
+                        text += symbs[i];
+                    }
+                }
+                return text;
             }
-            else if (sign == "Sqrt")
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("try again");
+                string a = Console.ReadLine();
+                return WithoutSpaces(a);
                 
-                try
-                {
-                    Console.WriteLine("Enter a number");
-                    double first = Double.Parse(Console.ReadLine());
-                    first = Math.Sqrt(first);
-                    Console.WriteLine($"Answer is {first}");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                
             }
-            else Console.WriteLine("You enter an incorrect operator");
-            Console.WriteLine("enter \"YES\" if you want to restart the program");
-            string answer = Console.ReadLine();
-            answer = answer.ToLower();
-            return answer;
+           
+        }
+        static string WhatOperation(string txt)
+        {
+            try
+            {
+                string[] sign = { "*", "/", "+", "-", "%", "Sqrt" };
+                for (int k = 0; k < sign.Length; k++)
+                {
+                    if (txt.Contains(sign[k]) == true)
+                    {
+                        return sign[k];
+                    }
+                }
+                throw new Exception("metod WhatOperator doesn't find acceptable operator");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("try again");
+                string a = Console.ReadLine();
+                return WhatOperation(a);
+            }
         }
     }
 }
