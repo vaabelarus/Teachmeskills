@@ -141,7 +141,7 @@ namespace Calc
                 int k = 0;
 
                 
-                throw new Exception("metod WhatOperator doesn't find acceptable operator");
+                throw new  Exception("metod WhatOperator doesn't find acceptable operator");
             }
             catch (Exception e)
             {
