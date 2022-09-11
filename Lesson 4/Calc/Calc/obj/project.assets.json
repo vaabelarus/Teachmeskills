@@ -8,19 +8,24 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\vasilevskiy\\.nuget\\packages\\": {}
+    "C:\\Users\\Andr\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\repos\\Teachmeskills\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
+      "projectUniqueName": "D:\\Repository\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
       "projectName": "Calc",
-      "projectPath": "D:\\repos\\Teachmeskills\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
-      "packagesPath": "C:\\Users\\vasilevskiy\\.nuget\\packages\\",
-      "outputPath": "D:\\repos\\Teachmeskills\\Teachmeskills\\Lesson 4\\Calc\\Calc\\obj\\",
+      "projectPath": "D:\\Repository\\Teachmeskills\\Lesson 4\\Calc\\Calc\\Calc.csproj",
+      "packagesPath": "C:\\Users\\Andr\\.nuget\\packages\\",
+      "outputPath": "D:\\Repository\\Teachmeskills\\Lesson 4\\Calc\\Calc\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\vasilevskiy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Andr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -60,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

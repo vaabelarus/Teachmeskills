@@ -13,8 +13,9 @@ namespace Calc
                 Console.WriteLine("enter an arithmetic operation from the suggested: +, -, *, /,  %, Sqrt.");
                 string text = Console.ReadLine();
                 text = WithoutSpaces(text);
-                string sign = WhatOperation(text);
-                double result = Calculator(text, sign);
+                text = TaskChecker(text);
+                string[] text_aray = CreateArray(text);
+                double result = Calculator(text_aray);
                 Console.WriteLine(result);
                 Console.WriteLine("enter \"YES\" if you want to restart the program");
                 answer = Console.ReadLine();
@@ -22,12 +23,13 @@ namespace Calc
                 
             }
         }
-        static double Calculator(string text, string sign)
+        static double Calculator(string []text)
         {
            
-                string[] values = text.Split(sign);
-            if (values.Length == 2)
+               
+            if (text.Length == 1&&text[0].Contains("Sqrt")==true)
             {
+                string[] values = text[0].Split("Sqrt");
                 double first = Convert.ToDouble(values[1]);
                 double result = RootOfTheNumber(first);
                 return result;
@@ -46,7 +48,7 @@ namespace Calc
                 };
                 return result;
             }
-           
+            
             
         }
         static double Addition(double first, double second)
@@ -106,16 +108,17 @@ namespace Calc
             }
            
         }
-        static string WhatOperation(string txt)
+        static string TaskChecker(string txt)
         {
             try
             {
                 string[] sign = { "*", "/", "+", "-", "%", "Sqrt" };
+                
                 for (int k = 0; k < sign.Length; k++)
                 {
                     if (txt.Contains(sign[k]) == true)
                     {
-                        return sign[k];
+                        return txt;
                     }
                 }
                 throw new Exception("metod WhatOperator doesn't find acceptable operator");
@@ -125,8 +128,58 @@ namespace Calc
                 Console.WriteLine(e.Message);
                 Console.WriteLine("try again");
                 string a = Console.ReadLine();
-                return WhatOperation(a);
+                a = WithoutSpaces(a);
+                return TaskChecker(a);
             }
+        }
+        static string FindASign(string [] txt)
+        {
+            string[] result=new string[2];
+            try
+            {
+                string[] sign = { "Sqrt","*", "/", "+", "-", "%"};
+                int k = 0;
+
+                
+                throw new Exception("metod WhatOperator doesn't find acceptable operator");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("try again");
+                string a = Console.ReadLine();
+                a = WithoutSpaces(a);
+                return TaskChecker(a);
+            }
+        }
+        static string[] DeleteEmptyIndex(string[] array)
+        {
+
+        }
+        static string[] CreateArray(string a)
+        {
+            string[] text =new string[a.Length];
+            for(int k = 0, i=0; k < a.Length; k++)
+            {
+                if((a[k]=='*')||(a[k]=='+')|| (a[k] == '-') || (a[k] == '/')|| (a[k] == '%') || (a[k] == '+'))
+                {
+                    i++;
+                    text[i] += a[k];
+                    i++;
+                }
+                else text[i] += a[k];
+            }
+            int size = 0;
+            foreach(string s in text)
+            {
+                if (String.IsNullOrWhiteSpace(s) == false) size++;
+            }
+            string[] new_text = new string[size];
+            for(int k = 0; k < new_text.Length; k++)
+            {
+                new_text[k] = text[k];
+            }
+            return new_text;
         }
     }
 }
