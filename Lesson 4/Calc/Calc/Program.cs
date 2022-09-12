@@ -6,7 +6,7 @@ namespace Calc
     {
         static void Main(string[] args)
         {
-           
+
             string answer = "yes";
             while (answer == "yes")
             {
@@ -15,66 +15,113 @@ namespace Calc
                 text = WithoutSpaces(text);
                 text = TaskChecker(text);
                 string[] text_aray = CreateArray(text);
-                double result = Calculator(text_aray);
+                text_aray = NumberCheaker(text_aray);
+                string result = Calculator(text_aray);
+                
                 Console.WriteLine(result);
                 Console.WriteLine("enter \"YES\" if you want to restart the program");
                 answer = Console.ReadLine();
                 answer = answer.ToLower();
-                
+
             }
         }
-        static double Calculator(string []text)
+        static string Calculator(string[] text)
         {
-           
-               
-            if (text.Length == 1&&text[0].Contains("Sqrt")==true)
+            text = RootOfTheNumber(text);
+            text = Multiplication(text);
+            text = Division(text);
+            text = Subtraction(text);
+            text = Addition(text);
+            return text[0];
+
+        }
+        static string [] Addition(string[] array)
+        {
+            
+            for (int k = 0; k < array.Length; k++)
             {
-                string[] values = text[0].Split("Sqrt");
-                double first = Convert.ToDouble(values[1]);
-                double result = RootOfTheNumber(first);
-                return result;
-            }
-            else
-            {
-                double first = Convert.ToDouble(values[0]);
-                double second = Convert.ToDouble(values[1]);
-                double result = sign switch
+                if (array[k].Contains("+") == true)
                 {
-                    "+" => Addition(first, second),
-                    "-" => Subtraction(first, second),
-                    "*" => Multiplication(first, second),
-                    "/" => Division(first, second),
-                    "%" => Remainder(first, second),
-                };
-                return result;
+                    double first = Convert.ToDouble(array[k - 1]);
+                    double second = Convert.ToDouble(array[k + 1]);
+                    double result = first + second;
+                    array[k] = Convert.ToString(result);
+                   array = DeleteEmptyIndex(array, k);
+                    array = Addition(array);
+                }
             }
-            
-            
+            return array;
         }
-        static double Addition(double first, double second)
+        static string[] Subtraction(string[] array)
         {
-            return first + second;
+            string[] new_array = array;
+            for (int k = 0; k < array.Length; k++)
+            {
+                if (array[k].Contains("-") == true)
+                {
+                    double first = Convert.ToDouble(array[k - 1]);
+                    double second = Convert.ToDouble(array[k + 1]);
+                    array[k] = Convert.ToString(first - second);
+                    new_array = DeleteEmptyIndex(array, k);
+                    new_array = Subtraction(new_array);
+
+                }
+            }
+            return new_array;
         }
-        static double Subtraction(double first, double second)
+        static string[] Multiplication(string[] array)
         {
-            return first - second;
+            string[] new_array = array;
+            for (int k = 0; k < array.Length; k++)
+            {
+                if (array[k].Contains("*") == true)
+                {
+                    double first = Convert.ToDouble(array[k - 1]);
+                    double second = Convert.ToDouble(array[k + 1]);
+                    array[k] = Convert.ToString(first * second);
+                    new_array = DeleteEmptyIndex(array, k);
+                    new_array = Multiplication(new_array);
+
+                }
+            }
+            return new_array;
+
         }
-        static double Multiplication(double first, double second)
+        static string [] Division(string[] array)
         {
-            return first * second;
-        }
-        static double Division(double first, double second)
-        {
-            return first / second;
+            string[] new_array = array;
+            for (int k = 0; k < array.Length; k++)
+            {
+                if (array[k].Contains("/") == true)
+                {
+                    double first = Convert.ToDouble(array[k - 1]);
+                    double second = Convert.ToDouble(array[k + 1]);
+                    array[k] = Convert.ToString(first / second);
+                    new_array = DeleteEmptyIndex(array, k);
+                    new_array = Division(new_array);
+
+                }
+            }
+            return new_array;
         }
         static double Remainder(double first, double second)
         {
             return first % second;
         }
-        static double RootOfTheNumber(double first)
+        static string[] RootOfTheNumber(string [] array)
         {
-            return Math.Sqrt(first);
-        } 
+            for (int k = 0; k < array.Length; k++)
+            {
+                if (array[k].Contains("Sqrt") == true)
+                {
+                    string[] values = array[k].Split("Sqrt");
+                    double first = Convert.ToDouble(values[1]);
+                    first = Math.Sqrt(first);
+                    array[k] = Convert.ToString(first);
+                }
+            }
+            return array;
+        }
         static string WithoutSpaces(string txt)
         {
             try
@@ -103,10 +150,8 @@ namespace Calc
                 Console.WriteLine("try again");
                 string a = Console.ReadLine();
                 return WithoutSpaces(a);
-                
-                
+
             }
-           
         }
         static string TaskChecker(string txt)
         {
@@ -132,29 +177,21 @@ namespace Calc
                 return TaskChecker(a);
             }
         }
-        static string FindASign(string [] txt)
+        
+        static string[] DeleteEmptyIndex(string[] array, int index)
         {
-            string[] result=new string[2];
-            try
+            string[] new_array = new string[array.Length-2];
+            for(int k = 0, i=0; i < new_array.Length; k++,i++)
             {
-                string[] sign = { "Sqrt","*", "/", "+", "-", "%"};
-                int k = 0;
-
+                if (k == index - 1 | k == index + 1)
+                {
+                    k++;
+                }
+                new_array[i] = array[k];
                 
-                throw new  Exception("metod WhatOperator doesn't find acceptable operator");
+                
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine("try again");
-                string a = Console.ReadLine();
-                a = WithoutSpaces(a);
-                return TaskChecker(a);
-            }
-        }
-        static string[] DeleteEmptyIndex(string[] array)
-        {
-
+            return new_array;
         }
         static string[] CreateArray(string a)
         {
@@ -181,5 +218,24 @@ namespace Calc
             }
             return new_text;
         }
+        static string[] NumberCheaker(string [] a)
+        {
+            try
+            {
+            for(int k = 0; k < a.Length; k++)
+                {
+                    if (a[k].Contains("+")!=false|| a[k].Contains("-") != false||a[k].Contains("*") != false|| a[k].Contains("/") !=false|| a[k].Contains("%")!=false || a[k].Contains("Sqrt")!=false)
+                    {
+                        double b = Convert.ToDouble(a[k]);
+                    }
+                }
+                return a;
+            }
+            catch
+            {
+                Console.WriteLine("QQQQQQQQQQQQQQ");
+            }
+        }
     }
+
 }
