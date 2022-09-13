@@ -6,20 +6,25 @@ namespace Calc
     {
         static void Main(string[] args)
         {
-
+            string[] memory = new string[5];
             string answer = "yes";
-            while (answer == "yes")
+            while (answer == "yes"||answer=="memory")
             {
+                if (answer == "memory")
+                {
+                    ShowOperations(memory);
+                }
                 Console.WriteLine("enter an arithmetic operation from the suggested: +, -, *, /,  %, Sqrt.");
                 string text = Console.ReadLine();
                 text = WithoutSpaces(text);
                 text = TaskChecker(text);
                 string[] text_aray = CreateArray(text);
                 text_aray = NumberCheaker(text_aray);
+                memory = OperationMemory(memory, text_aray);
+
                 string result = Calculator(text_aray);
-                
                 Console.WriteLine(result);
-                Console.WriteLine("enter \"YES\" if you want to restart the program");
+                Console.WriteLine("enter \"YES\" if you want to restart the program or \"Memory\" if you want to see last operations");
                 answer = Console.ReadLine();
                 answer = answer.ToLower();
 
@@ -40,11 +45,11 @@ namespace Calc
             
             for (int k = 0; k < array.Length; k++)
             {
-                if (array[k].Contains("+") == true)
+                if (array[k].Contains("+") == true && array.Length > 1)
                 {
                     double first = Convert.ToDouble(array[k - 1]);
                     double second = Convert.ToDouble(array[k + 1]);
-                    double result = first + second;
+                    double result  = first + second;
                     array[k] = Convert.ToString(result);
                    array = DeleteEmptyIndex(array, k);
                     array = Addition(array);
@@ -57,11 +62,12 @@ namespace Calc
             string[] new_array = array;
             for (int k = 0; k < array.Length; k++)
             {
-                if (array[k].Contains("-") == true)
+                if (array[k].Contains("-") == true&&array.Length>1&&array[k].Length<2)
                 {
                     double first = Convert.ToDouble(array[k - 1]);
                     double second = Convert.ToDouble(array[k + 1]);
-                    array[k] = Convert.ToString(first - second);
+                    double result = first - second;
+                    array[k] = Convert.ToString(result);
                     new_array = DeleteEmptyIndex(array, k);
                     new_array = Subtraction(new_array);
 
@@ -74,7 +80,7 @@ namespace Calc
             string[] new_array = array;
             for (int k = 0; k < array.Length; k++)
             {
-                if (array[k].Contains("*") == true)
+                if (array[k].Contains("*") == true && array.Length > 1)
                 {
                     double first = Convert.ToDouble(array[k - 1]);
                     double second = Convert.ToDouble(array[k + 1]);
@@ -92,7 +98,7 @@ namespace Calc
             string[] new_array = array;
             for (int k = 0; k < array.Length; k++)
             {
-                if (array[k].Contains("/") == true)
+                if (array[k].Contains("/") == true && array.Length > 1)
                 {
                     double first = Convert.ToDouble(array[k - 1]);
                     double second = Convert.ToDouble(array[k + 1]);
@@ -224,16 +230,48 @@ namespace Calc
             {
             for(int k = 0; k < a.Length; k++)
                 {
-                    if (a[k].Contains("+")!=false|| a[k].Contains("-") != false||a[k].Contains("*") != false|| a[k].Contains("/") !=false|| a[k].Contains("%")!=false || a[k].Contains("Sqrt")!=false)
+                    if (a[k].Contains("+")==true|| a[k].Contains("-") == true||a[k].Contains("*") == true|| a[k].Contains("/") ==true|| a[k].Contains("%")==true || a[k].Contains("Sqrt")==true)
                     {
-                        double b = Convert.ToDouble(a[k]);
+                        k++;
                     }
+                    double b = Convert.ToDouble(a[k]);
                 }
                 return a;
             }
             catch
             {
-                Console.WriteLine("QQQQQQQQQQQQQQ");
+                Console.WriteLine("Your enter wrong number");
+                Console.WriteLine("Enter an arithmetic operation from the suggested: +, -, *, /,  %, Sqrt.");
+                string text = Console.ReadLine();
+                text = WithoutSpaces(text);
+                text = TaskChecker(text);
+                string[] text_aray = CreateArray(text);
+                text_aray = NumberCheaker(text_aray);
+                return text_aray;
+            }
+        }
+        static string[] OperationMemory(string[] memory,string[]array)
+        {
+            string text = "";
+            foreach(string s in array)
+            {
+                text += s;
+            }
+            for(int k = memory.Length-1; k>0; k--)
+            {
+                memory[k] = memory[k - 1];
+                
+            }
+            memory[0] = text;
+            return memory;
+        }
+        static void ShowOperations(string[] array)
+        {
+            int k = 1;
+            foreach (string s in array)
+            {
+                
+                Console.WriteLine($"{k++}  {s}");
             }
         }
     }
